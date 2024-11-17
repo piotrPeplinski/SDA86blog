@@ -1,8 +1,22 @@
-<h1>Home</h1>
+{% extends 'base.html' %}
+
+{% block title %}
+Cars blog - home
+{% endblock title %}
+
+
+{% block content %}
+
+<h1>My blog about cars</h1>
+<h3>I have written {{posts.count}} post{{posts.count|pluralize}}</h3>
 
 {% for post in posts %}
-<h2>{{post.title}}</h2>
-<h5>{{post.date}}</h5>
-<p>{{post.text}}</p>
+<a href="{% url 'detail' post.id %}">
+    <h2>{{post.title}}</h2>
+</a>
+<h5>{{post.date|date:"j F Y"}}</h5>
+<p>{{post.text|truncatechars:50}}</p>
 <hr>
 {% endfor %}
+
+{% endblock content %}
